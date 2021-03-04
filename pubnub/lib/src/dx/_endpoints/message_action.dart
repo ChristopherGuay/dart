@@ -28,6 +28,8 @@ class FetchMessageActionsParams extends Parameters {
       if (keyset.authKey != null) 'auth': '${keyset.authKey}',
     };
 
+    print('Test: This is the evil function.');
+
     return Request.get(
         uri: Uri(pathSegments: pathSegments, queryParameters: queryParameters));
   }

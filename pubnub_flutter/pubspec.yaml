@@ -16,6 +16,7 @@ scripts:
 
 dependencies:
   async: ^2.4.2
+  # If this were to be published, then you'd have to publish pubnub dart and then change this to point to the live pubnub dart
   pubnub:
     path: ../pubnub
   flutter:
