@@ -28,10 +28,11 @@ class FetchMessageActionsParams extends Parameters {
       if (keyset.authKey != null) 'auth': '${keyset.authKey}',
     };
 
-    print('Test: This is the evil function.');
+    var headers = {'contentType': 'application/json, charset: utf-8'};
 
     return Request.get(
-        uri: Uri(pathSegments: pathSegments, queryParameters: queryParameters));
+        uri: Uri(pathSegments: pathSegments, queryParameters: queryParameters),
+        headers: headers);
   }
 }
 
