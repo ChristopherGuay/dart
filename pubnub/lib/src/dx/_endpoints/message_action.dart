@@ -28,11 +28,8 @@ class FetchMessageActionsParams extends Parameters {
       if (keyset.authKey != null) 'auth': '${keyset.authKey}',
     };
 
-    var headers = {'contentType': 'application/json, charset: utf-8'};
-
     return Request.get(
-        uri: Uri(pathSegments: pathSegments, queryParameters: queryParameters),
-        headers: headers);
+        uri: Uri(pathSegments: pathSegments, queryParameters: queryParameters));
   }
 }
 
@@ -140,8 +137,11 @@ class AddMessageActionParams extends Parameters {
       if (keyset.uuid != null) 'uuid': '${keyset.uuid}'
     };
 
+    var headers = {'contentType': 'application/json, charset: utf-8'};
+
     return Request.post(
         uri: Uri(pathSegments: pathSegments, queryParameters: queryParameters),
+        headers: headers,
         body: messageAction);
   }
 }
