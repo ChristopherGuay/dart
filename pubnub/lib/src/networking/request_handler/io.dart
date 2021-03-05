@@ -71,6 +71,10 @@ class RequestHandler extends IRequestHandler {
     } else {
       if (data.body != null) {
         body = utf8.encode(data.body.toString());
+        if (json.decode(data.body.toString()) is Map) {
+          headers['Content-Type'] =
+              ContentType('application', 'json', charset: 'utf-8').toString();
+        }
       }
     }
 
@@ -102,16 +106,14 @@ class RequestHandler extends IRequestHandler {
         }
       });
 
-      if (body != null) {
-        request.headers.contentType =
-            new ContentType("application", "json", charset: "utf-8");
-        request.add(body);
+      // HttpHeaders are immutable after request body is written to
+      for (var header in headers.entries) {
+        request.headers.set(header.key, header.value);
       }
 
-      // HttpHeaders are immutable after request body is written to
-      // for (var header in headers.entries) {
-      //   request.headers.set(header.key, header.value);
-      // }
+      if (body != null) {
+        request.add(body);
+      }
 
       var clientResponse = await request.close();
 
