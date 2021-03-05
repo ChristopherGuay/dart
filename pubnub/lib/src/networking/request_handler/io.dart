@@ -103,12 +103,15 @@ class RequestHandler extends IRequestHandler {
       });
 
       if (body != null) {
+        request.headers.contentType =
+            new ContentType("application", "json", charset: "utf-8");
         request.add(body);
       }
 
-      for (var header in headers.entries) {
-        request.headers.set(header.key, header.value);
-      }
+      // HttpHeaders are immutable after request body is written to
+      // for (var header in headers.entries) {
+      //   request.headers.set(header.key, header.value);
+      // }
 
       var clientResponse = await request.close();
 
